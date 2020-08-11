@@ -85,7 +85,7 @@
 
 	<target name="dependencies" description="Resolve dependencies">
 		<creel:run ref="dependencies" libraryDir="${cache.jars}" state="${cache.jars}/.creel">
-			<module group="jline" name="jline" version="2.13+" />
+			<module group="jline" name="jline" version="2.14.6" />
 			<repository id="repo" url="${dependencies.repo}" />
 		</creel:run>
 	</target>
@@ -154,10 +154,10 @@
 		</copy>
 	</target>
 
-	<target name="javadocs" description="Create API documentation if not present">
+	<!--target name="javadocs" description="Create API documentation if not present">
 		<available file="${distribution.api}" property="javadocs-present" />
 		<antcall target="javadocs-overwrite" />
-	</target>
+	</target-->
 
 	<target name="javadocs-overwrite" depends="dependencies, ant-dependencies, eclipse-dependencies" description="Create API documentation" unless="javadocs-present">
 		<javadoc
@@ -222,7 +222,8 @@
 		</jar>
 	</target>
 
-	<target name="distribution" depends="libraries, eclipse-libraries, javadocs" description="Assemble distribution">
+	<!--target name="distribution" depends="libraries, eclipse-libraries, javadocs" description="Assemble distribution"-->
+        <target name="distribution" depends="libraries, eclipse-libraries" description="Assemble distribution">
 		<copy todir="${distribution.source}/${component.group}/${component.artifact}/${component.version}${component.version.postfix}">
 			<fileset dir="${component.source}" />
 		</copy>
@@ -265,11 +266,11 @@
 		<exec executable="${maven}" dir="${cache.maven.pom}">
 			<arg value="deploy" />
 			<arg value="-DaltDeploymentRepository=${distribution.repo.id}::default::${distribution.repo}" />
-			<arg value="-Djarsigner.keystore=${sign.keystore}" />
+			<!--arg value="-Djarsigner.keystore=${sign.keystore}" />
 			<arg value="-Djarsigner.storepass=${sign.storepass}" />
 			<arg value="-Djarsigner.alias=${sign.alias}" />
 			<arg value="-Djarsigner.keypass=${sign.keypass}" />
-			<arg value="-Djarsigner.tsa=http://timestamp.digicert.com" />
+			<arg value="-Djarsigner.tsa=http://timestamp.digicert.com" /-->
 		</exec>
 	</target>
 
