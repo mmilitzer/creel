@@ -85,7 +85,7 @@
 
 	<target name="dependencies" description="Resolve dependencies">
 		<creel:run ref="dependencies" libraryDir="${cache.jars}" state="${cache.jars}/.creel">
-			<module group="jline" name="jline" version="2.14.6" />
+			<module group="jline" name="jline" version="2.14.2" />
 			<repository id="repo" url="${dependencies.repo}" />
 		</creel:run>
 	</target>
